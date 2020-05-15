@@ -29,10 +29,8 @@ class ProductsController extends BaseController {
    */
   getProduct() {
     return this.asyncWrapper(async (req, res) => {
-      const {
-        params: { id: prodcutId }
-      } = req;
-      const product = await this.service.getById(prodcutId, { plain: true });
+      const { id: productId } = req.params;
+      const product = await this.service.getById(productId, { plain: true });
 
       ExceptionHandler.throwErrorIfNull(product);
 
@@ -87,9 +85,7 @@ class ProductsController extends BaseController {
    */
   destroyProduct() {
     return this.asyncWrapper(async (req, res) => {
-      const {
-        params: { id: productId }
-      } = req;
+      const { id: productId } = req.params;
 
       await this.service.delete(productId);
       this.sendResponse(res, null, null, 204);

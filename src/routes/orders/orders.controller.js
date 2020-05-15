@@ -13,7 +13,8 @@ class OrdersController extends BaseController {
    */
   getOrders() {
     return this.asyncWrapper(async (req, res) => {
-      const orders = await this.service.getAll({ plain: true });
+      const { id: userId } = req.user;
+      const orders = await this.service.find({ userId }, { plain: true });
 
       this.sendResponse(res, orders);
     });
@@ -30,9 +31,13 @@ class OrdersController extends BaseController {
   getOrder() {
     return this.asyncWrapper(async (req, res) => {
       const {
-        params: { id: productId }
+        params: { id: orderId },
+        user: { id: userId }
       } = req;
-      const product = await this.service.getById(productId, { plain: true });
+      const product = await this.service.find(
+        { id: orderId, userId },
+        { plain: true }
+      );
 
       ExceptionHandler.throwErrorIfNull(product);
 
@@ -50,7 +55,7 @@ class OrdersController extends BaseController {
    */
   placeOrder() {
     return this.asyncWrapper(async (req, res) => {
-      const userId = 1;
+      const { id: userId } = req.user;
       const order = await this.service.create({ userId });
 
       this.sendResponse(res, order, undefined, 201);
@@ -68,9 +73,9 @@ class OrdersController extends BaseController {
   cancelOrder() {
     return this.asyncWrapper(async (req, res) => {
       const {
-        params: { id: orderId }
+        params: { id: orderId },
+        user: { id: userId }
       } = req;
-      const userId = 1;
       const order = await this.service.cancelOrder(userId, orderId);
 
       this.sendResponse(res, order);

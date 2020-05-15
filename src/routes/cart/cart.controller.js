@@ -13,7 +13,7 @@ class CartController extends BaseController {
    */
   getCart() {
     return this.asyncWrapper(async (req, res) => {
-      const userId = 1;
+      const { id: userId } = req.user;
       const cart = await this.service.cart(userId);
 
       ExceptionHandler.throwErrorIfNull(cart);
@@ -32,9 +32,9 @@ class CartController extends BaseController {
    */
   addToCart() {
     return this.asyncWrapper(async (req, res) => {
-      const { body } = req;
+      const { body, user } = req;
 
-      body.userId = 1;
+      body.userId = user.id;
       const cart = await this.service.addToCart(body);
 
       this.sendResponse(res, cart, undefined, 201);
@@ -52,10 +52,10 @@ class CartController extends BaseController {
   removeItem() {
     return this.asyncWrapper(async (req, res) => {
       const {
-        params: { productId }
+        params: { productId },
+        user: { id: userId }
       } = req;
 
-      const userId = 1;
       const cart = await this.service.removeItem(userId, +productId);
 
       this.sendResponse(res, cart);
@@ -74,10 +74,10 @@ class CartController extends BaseController {
     return this.asyncWrapper(async (req, res) => {
       const {
         params: { productId },
-        body: { qty }
+        body: { qty },
+        user: { id: userId }
       } = req;
 
-      const userId = 1;
       const payload = { productId: +productId, qty };
       const cart = await this.service.updateCart(userId, payload);
 
@@ -95,7 +95,7 @@ class CartController extends BaseController {
    */
   clearCart() {
     return this.asyncWrapper(async (req, res) => {
-      const userId = 1;
+      const { id: userId } = req.user;
       const cart = await this.service.clearCart(userId);
 
       this.sendResponse(res, cart);

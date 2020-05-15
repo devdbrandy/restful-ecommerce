@@ -78,7 +78,6 @@ export default class Exception {
    */
   static handleDatabaseUniqueError() {
     return (error, req, res, next) => {
-      console.log('eror', error);
       if (error instanceof UniqueConstraintError) {
         error.statusCode = 400;
         delete error.errors;

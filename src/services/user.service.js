@@ -84,18 +84,16 @@ class UserService extends BaseService {
   }
 
   /**
-   * Get a specific user by username or email
+   * Get a specific user by email
    *
-   * @param {number} id - The resource unique identifier
+   * @param {number} email - The resource unique email
    * @param {object} options - Query options
    * @returns {object} The resource (if found)
    * @memberof UserService
    */
-  async getByEmailOrUsername(field, options = {}) {
+  async getByEmail(email, options = {}) {
     const result = await this.model.findOne({
-      where: {
-        [Op.or]: [{ email: field }, { username: field }]
-      }
+      where: { email }
     });
 
     const { plain } = options;

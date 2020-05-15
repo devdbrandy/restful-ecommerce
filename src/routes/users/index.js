@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import Validator from '../../middlewares/validator';
+import AuthGuard from '@middlewares/authenticate';
+import Validator from '@middlewares/validator';
 import Controller from './users.controller';
 
 const router = Router();
@@ -13,6 +14,8 @@ router.get('/users/:id', Validator.validate('idParam'), Controller.getUser());
 /* Create a user */
 router.post(
   '/users',
+  AuthGuard.verifyToken,
+  AuthGuard.adminOnly,
   Validator.validate('createUser'),
   Controller.createUser()
 );
@@ -20,6 +23,8 @@ router.post(
 /* Edit a user */
 router.put(
   '/users/:id',
+  AuthGuard.verifyToken,
+  AuthGuard.adminOnly,
   Validator.validate('idParam'),
   Controller.updateUser()
 );
@@ -27,6 +32,8 @@ router.put(
 /* Delete a user */
 router.delete(
   '/users/:id',
+  AuthGuard.verifyToken,
+  AuthGuard.adminOnly,
   Validator.validate('idParam'),
   Controller.destroyUser()
 );

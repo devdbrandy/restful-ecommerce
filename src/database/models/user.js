@@ -23,7 +23,8 @@ export default (sequelize, DataTypes) => {
           name: 'users_email',
           msg: 'A user with this email already exists.'
         }
-      }
+      },
+      isAdmin: DataTypes.BOOLEAN
     },
     {
       paranoid: true,
@@ -57,17 +58,7 @@ export default (sequelize, DataTypes) => {
       as: 'cart',
       onDelete: 'cascade'
     });
-
-    // User.belongsToMany(models.Role, {
-    //   through: 'UserRoles',
-    //   foreignKey: 'userId',
-    //   as: 'roles',
-    // });
   };
-
-  // User.prototype.comparePassword = function compare(password) {
-  //   return bcrypt.compareSync(password, this.password);
-  // };
 
   return User;
 };

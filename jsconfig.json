@@ -5,6 +5,7 @@
     "module": "commonjs",
     "paths": {
       "@config/*": ["src/config/*"],
+      "@factories/*": ["src/database/factories/*"],
       "@helpers/*": ["src/helpers/*"],
       "@middlewares/*": ["src/middlewares/*"],
       "@models/*": ["src/database/models/*"],

@@ -12,7 +12,7 @@ export const up = (queryInterface, Sequelize) =>
     },
     description: {
       allowNull: false,
-      type: Sequelize.STRING
+      type: Sequelize.TEXT
     },
     price: {
       type: Sequelize.INTEGER

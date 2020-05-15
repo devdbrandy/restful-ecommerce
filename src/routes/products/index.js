@@ -1,5 +1,7 @@
 import { Router } from 'express';
-import Validator from '../../middlewares/validator';
+
+import Validator from '@middlewares/validator';
+import AuthGuard from '@middlewares/authenticate';
 import Controller from './products.controller';
 
 const router = Router();
@@ -17,6 +19,7 @@ router.get(
 /* Create a product */
 router.post(
   '/products',
+  AuthGuard.verifyToken,
   Validator.validate('createProduct'),
   Controller.createProduct()
 );
@@ -24,6 +27,7 @@ router.post(
 /* Edit a product */
 router.put(
   '/products/:id',
+  AuthGuard.verifyToken,
   Validator.validate('idParam'),
   Controller.updateProduct()
 );
@@ -31,6 +35,7 @@ router.put(
 /* Delete a product */
 router.delete(
   '/products/:id',
+  AuthGuard.verifyToken,
   Validator.validate('idParam'),
   Controller.destroyProduct()
 );
