@@ -1,5 +1,8 @@
 # Restful Ecommerce
 
+![Docker Image CI](https://github.com/devdbrandy/restful-ecommerce/workflows/Docker%20Image%20CI/badge.svg?branch=master)
+![Node.js CI](https://github.com/devdbrandy/restful-ecommerce/workflows/Node.js%20CI/badge.svg?branch=master)
+
 ## Overview
 
 A simple minimalistic ecommerce REST API built with Node.js and Express.js, showcasing three major functionalities:
@@ -8,6 +11,8 @@ A simple minimalistic ecommerce REST API built with Node.js and Express.js, show
 2. Products listing
 3. Order placements
 4. Access restrictions
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/cfdf0e762edcf3abe91b)
 
 > Demo Users
 >
@@ -60,6 +65,8 @@ To get started, ensure that you have the following installed on your local machi
 ### 1.3. Test Locally
 
 To test or consume api locally, you can make use of [_Postman_](https://www.getpostman.com) or [_Insomnia_](https://insomnia.rest/download/)
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/cfdf0e762edcf3abe91b)
 
 ### 1.4. Running Test
 

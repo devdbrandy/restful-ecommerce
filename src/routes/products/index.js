@@ -24,10 +24,11 @@ router.post(
   Controller.createProduct()
 );
 
-/* Edit a product */
+/* Edit a specific product */
 router.put(
   '/products/:id',
   AuthGuard.verifyToken,
+  AuthGuard.adminOnly,
   Validator.validate('idParam'),
   Controller.updateProduct()
 );
@@ -36,6 +37,7 @@ router.put(
 router.delete(
   '/products/:id',
   AuthGuard.verifyToken,
+  AuthGuard.adminOnly,
   Validator.validate('idParam'),
   Controller.destroyProduct()
 );

@@ -10,13 +10,14 @@
     "db:refresh": "npm run db:reset && npm run db:migrate",
     "db:reset": "sequelize db:migrate:undo:all",
     "db:seed": "sequelize db:seed:all",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run build",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run build && npm run db:migrate",
     "lint": "eslint src",
     "sequelize": "sequelize",
     "serve": "nodemon -r ./config.js --exec babel-node src/bin/www.js",
     "start": "node ./dist/bin/www.js"
   },
   "dependencies": {
+    "@babel/runtime": "^7.9.6",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",

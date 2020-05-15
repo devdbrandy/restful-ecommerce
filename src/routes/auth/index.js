@@ -4,10 +4,10 @@ import Controller from './auth.controller';
 
 const router = Router();
 
-/* POST authenticate user. */
+/* POST create user account. */
 router.post('/register', Validator.validate('register'), Controller.register());
 
-/* POST authenticate user. */
+/* POST login user. */
 router.post('/login', Validator.validate('login'), Controller.login());
 
 export default router;

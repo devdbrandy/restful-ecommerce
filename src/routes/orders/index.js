@@ -8,7 +8,7 @@ const router = Router();
 /* List of orders */
 router.get('/orders', AuthGuard.verifyToken, Controller.getOrders());
 
-/* Get a single product */
+/* Get a specific order */
 router.get(
   '/orders/:id',
   AuthGuard.verifyToken,
