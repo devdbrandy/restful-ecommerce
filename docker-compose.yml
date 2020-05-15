@@ -1,20 +1,27 @@
 version: "3"
 services:
-  api:
-    image: dbrandy/restful-ecommerce
-    build: .
-    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; npm run db:migrate & npm start'
-    ports:
-      - "3000:3000"
-    env_file: .env
-    depends_on:
-      - db
-    environment:
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/restecommerce
-
   db:
     image: postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=restecommerce
+    ports:
+      - "5432:5432"
+    volumes:
+      - restful-ecommerce-db:/var/lib/postgresql/data
+
+  api:
+    image: dbrandy/restful-ecommerce
+    build: .
+    command: npm run db:migrate && npm start
+    env_file: .env
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/restecommerce
+
+volumes:
+  restful-ecommerce-db:

@@ -51,7 +51,7 @@ To get started, ensure that you have the following installed on your local machi
 - Make a duplicate of `.env.example` and rename to `.env`, then configure your credentials.
   NB: After creating `.env` file, ensure that you set `APP_PKEY` to any secret phrase you want.
 - Install dependencies by running `npm i` or `npm install` on your terminal.
-- Run migration: `npm run migrate`
+- Run migration: `npm run db:migrate`
 - (Optional) Seed dummy data `npm run db:seed`
 - Two npm scripts are availiable to spin up the app server:
   - `npm run start` spin up the server without watching for any file changes (Requires `npm run build`)

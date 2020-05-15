@@ -6,7 +6,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN mv .env.example .env
+RUN cp .env.example .env
 
 # Install dependencies and build the static files
 RUN npm i
