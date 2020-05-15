@@ -1,0 +1,17 @@
+node_modules
+npm-debug.log
+Dockerfile
+docker-compose.yml
+coverage
+dist
+logs
+docs
+*.md
+.*
+**/*.test*
+test*
+jsconfig.json
+
+!.babelrc
+!.env.example
+!README.md
