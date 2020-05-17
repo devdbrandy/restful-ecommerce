@@ -1,7 +1,7 @@
 export default (sequelize, DataTypes) => {
   const Cart = sequelize.define('Cart', {
     userId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     cartItem: {

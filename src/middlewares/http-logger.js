@@ -1,5 +1,6 @@
 import morgan from 'morgan';
-import logger from '../helpers/logger';
+import { env } from '@helpers/utils';
+import logger from '@helpers/logger';
 
 logger.stream = {
   write: message => logger.info(message.substring(0, message.lastIndexOf('\n')))
@@ -7,5 +8,5 @@ logger.stream = {
 
 export default morgan(
   ':method :url :status :response-time ms - :res[content-length]',
-  { stream: logger.stream }
+  { stream: logger.stream, skip: () => env('NODE_ENV') === 'test' }
 );

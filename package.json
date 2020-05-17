@@ -14,10 +14,14 @@
     "lint": "eslint src",
     "sequelize": "sequelize",
     "serve": "nodemon -r ./config.js --exec babel-node src/bin/www.js",
-    "start": "node ./dist/bin/www.js"
+    "start": "node ./dist/bin/www.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.6",
+    "@types/jest": "^25.2.2",
+    "babel-jest": "^26.0.1",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -27,6 +31,7 @@
     "faker": "^4.1.0",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "jest": "^26.0.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
     "pg": "^8.2.0",

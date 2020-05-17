@@ -60,5 +60,13 @@ export default (sequelize, DataTypes) => {
     });
   };
 
+  User.associate = models => {
+    User.hasMany(models.Order, {
+      foreignKey: 'userId',
+      as: 'orders',
+      onDelete: 'cascade'
+    });
+  };
+
   return User;
 };

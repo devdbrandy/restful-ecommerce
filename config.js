@@ -10,7 +10,7 @@ load({
   path: resolve(__dirname, dotenvFile),
   defaults: resolve(__dirname, '.env'),
   schema: resolve(__dirname, '.env.example'),
-  errorOnMissing: false,
+  errorOnMissing: true,
   errorOnExtra: false,
   errorOnRegex: false,
   overrideProcessEnv: false

@@ -1,7 +1,7 @@
 export default (sequelize, DataTypes) => {
   const Order = sequelize.define('Order', {
     userId: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     items: {
