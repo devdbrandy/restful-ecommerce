@@ -74,7 +74,7 @@ Test specs are implemented using [_jest_](https://jestjs.io).
 
 Two npm scripts are available to run the test suite:
 
-1. `npm t` or `npm test` - Performs a single full test suite run, including instanbul code coverage reporting. Summary coverage reports are written to stdout, and detailed HTML reports are available in `/coverage/index.html`
+1. `npm t` or `npm test` - Performs a single full test suite run, including jest code coverage reporting. Summary coverage reports are written to stdout, and detailed HTML reports are available in `/coverage/lcov-report/index.html`
 2. `npm run test:watch` - This watches for any file changes and runs the full test suite.
 
 ## 2. :lock: Authentication
