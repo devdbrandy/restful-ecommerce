@@ -12,14 +12,21 @@ A simple minimalistic ecommerce REST API built with Node.js and Express.js, show
 3. Order placements
 4. Access restrictions
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/cfdf0e762edcf3abe91b)
-
 > Demo Users
 >
 > | Email               | Password | Access       |
 > | ------------------- | -------- | ------------ |
 > | `admin@example.com` | `secret` | Admin Access |
 > | `user@example.com`  | `secret` | User Access  |
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/cfdf0e762edcf3abe91b)
+
+---
+
+Database Schema Design
+![Database Schema Design](/screenshots/db-schema-design.png)
+
+---
 
 <!-- TOC depthFrom:2 -->
 
@@ -50,7 +57,7 @@ To get started, ensure that you have the following installed on your local machi
 - Clone repository or clone your own fork
 
   ```bash
-  git clone https://github.com/devdbrandy/minimalistic-microservice.git
+  git clone https://github.com/devdbrandy/restful-ecommerce.git
   ```
 
 - Make a duplicate of `.env.example` and rename to `.env`, then configure your credentials.
