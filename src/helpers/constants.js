@@ -14,8 +14,7 @@ export const messages = {
 
   NO_AUTH_TOKEN:
     'Access denied! Missing or invalid token. Token must be in the format: Bearer <token>.',
-  INVALID_AUTH_TOKEN:
-    'Authentication failure: Invalid :monkey_face: or expired token.',
+  INVALID_AUTH_TOKEN: 'Authentication failure: Invalid or expired token 🐵.',
   INVALID_CREDENTIALS: 'Your username or password is incorrect.',
 
   ACCESS_DENIED: 'Access denied!'

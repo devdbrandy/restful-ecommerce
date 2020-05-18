@@ -2,16 +2,11 @@ import models from '@models';
 import ExceptionHandler from '@helpers/exception';
 import BaseService from './base.service';
 import ProductService from './product.service';
-import UserService from './user.service';
 import CartItem from './cart-item';
 
 class CartService extends BaseService {
-  async cart(userId) {
-    const user = await UserService.getById(userId);
-
-    ExceptionHandler.throwErrorIfNull(user);
-
-    const cart = await user.getCart();
+  async cart(userId, options = {}) {
+    const cart = await super.find({ userId }, options);
     return cart;
   }
 

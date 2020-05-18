@@ -15,7 +15,7 @@
     "sequelize": "sequelize",
     "serve": "nodemon -r ./config.js --exec babel-node src/bin/www.js",
     "start": "node ./dist/bin/www.js",
-    "test": "jest",
+    "test": "jest --coverage",
     "test:watch": "jest --watch"
   },
   "dependencies": {

@@ -12,7 +12,7 @@ class AuthController extends BaseController {
       };
       const payload = await AuthService.register(user);
 
-      this.sendResponse(res, payload);
+      this.sendResponse(res, payload, undefined, 201);
     });
   }
 

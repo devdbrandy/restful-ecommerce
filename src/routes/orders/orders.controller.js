@@ -56,7 +56,7 @@ class OrdersController extends BaseController {
   placeOrder() {
     return this.asyncWrapper(async (req, res) => {
       const { id: userId } = req.user;
-      const order = await this.service.create({ userId });
+      const order = await this.service.placeOrder({ userId });
 
       this.sendResponse(res, order, undefined, 201);
     });

@@ -4,7 +4,7 @@ import BaseService from './base.service';
 import CartService from './cart.service';
 
 class OrderService extends BaseService {
-  async create(payload) {
+  async placeOrder(payload) {
     const { userId } = payload;
     const cart = await CartService.cart(userId);
     const orderData = {

@@ -8,7 +8,10 @@ let mockProduct;
 let authToken;
 
 beforeAll(async () => {
-  const adminUser = await UserFactory({ isAdmin: true }, false);
+  const adminUser = await UserFactory(
+    { email: 'admin@products.com', isAdmin: true },
+    false
+  );
   mockProduct = await ProductFactory({}, true);
 
   mockAdmin = adminUser.get();

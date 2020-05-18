@@ -11,3 +11,12 @@ export const auth = async user => {
 
   return res.body.data.token;
 };
+
+export const addToCart = async (payload, token) => {
+  const res = await server()
+    .post(`${apiBase}/cart/add`)
+    .set('Authorization', `Bearer ${token}`)
+    .send(payload);
+
+  return res.body.data;
+};
