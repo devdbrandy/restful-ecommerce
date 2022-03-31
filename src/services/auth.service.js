@@ -1,10 +1,10 @@
-import bcrypt from 'bcryptjs';
-import createError from 'http-errors';
+import bcrypt from 'bcryptjs'
+import createError from 'http-errors'
 
-import UserService from '@services/user.service';
-import JWTService from '@services/jwt.service';
+import UserService from '@services/user.service'
+import JWTService from '@services/jwt.service'
 
-import { messages } from '@helpers/constants';
+import { messages } from '@helpers/constants'
 
 /**
  * Auth Service Module
@@ -13,30 +13,39 @@ import { messages } from '@helpers/constants';
  * @class AuthService
  */
 class AuthService {
-  static async register(user) {
-    // create and persist user
-    const newUser = await UserService.create(user, { plain: true });
+    static async register(user) {
+        // create and persist user
+        let newUser
+        try {
+            newUser = await UserService.create(user, { plain: true })
+        } catch (err) {
+            console.log(err)
+        }
 
-    // generate jwt token from user payload
-    const token = JWTService.sign(newUser);
-    return { ...newUser, token };
-  }
+        if (!newUser) {
+            throw createError(500, 'Failed to create user')
+        }
 
-  static async login(email, password) {
-    // fetch user data
-    const user = await UserService.getByEmail(email, { plain: true });
-
-    // compare password
-    if (!bcrypt.compareSync(password, user.password)) {
-      const { INVALID_CREDENTIALS } = messages;
-      throw createError(403, INVALID_CREDENTIALS);
+        // generate jwt token from user payload
+        const token = JWTService.sign(newUser)
+        return { ...newUser, token }
     }
 
-    // generate jwt token from user payload
-    delete user.password;
-    const token = JWTService.sign(user);
-    return { ...user, token };
-  }
+    static async login(email, password) {
+        // fetch user data
+        const user = await UserService.getByEmail(email, { plain: true })
+
+        // compare password
+        if (!(await bcrypt.compare(password, user.password))) {
+            const { INVALID_CREDENTIALS } = messages
+            throw createError(403, INVALID_CREDENTIALS)
+        }
+
+        // generate jwt token from user payload
+        delete user.password
+        const token = JWTService.sign(user)
+        return { ...user, token }
+    }
 }
 
-export default AuthService;
+export default AuthService

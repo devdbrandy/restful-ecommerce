@@ -2,6 +2,7 @@ import createError from 'http-errors'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import path from 'path'
+import cors from 'cors'
 
 import httpLogger from '@middlewares/http-logger'
 import Exception from '@helpers/exception'
@@ -17,6 +18,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, '/../public')))
+app.use(cors({ origin: true, credentials: true }))
 
 // register modules
 routeModules(app)
