@@ -14,7 +14,6 @@ class ProductsController extends BaseController {
      */
     getAllProducts() {
         return this.asyncWrapper(async (req, res) => {
-            const products = { neco: 'aa' }
             const products = await this.service.getAll({ plain: true })
 
             this.sendResponse(res, products)
