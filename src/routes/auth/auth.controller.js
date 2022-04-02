@@ -1,6 +1,7 @@
 import AuthService from '@services/auth.service'
 import BaseController from '../base-controller'
 import createError from 'http-errors'
+import logger from '@helpers/logger'
 
 class AuthController extends BaseController {
     register() {
@@ -23,9 +24,13 @@ class AuthController extends BaseController {
     login() {
         return this.asyncWrapper(async (req, res) => {
             const { email, password } = req.body
-            const payload = await AuthService.login(email, password)
-
-            this.sendResponse(res, payload)
+            try {
+                const payload = await AuthService.login(email, password)
+                this.sendResponse(res, payload)
+            } catch (err) {
+                logger.error(err)
+                this.sendError(res, err)
+            }
         })
     }
 }

@@ -5,6 +5,7 @@ import UserService from '@services/user.service'
 import JWTService from '@services/jwt.service'
 
 import { messages } from '@helpers/constants'
+import logger from '@helpers/logger'
 
 /**
  * Auth Service Module
@@ -33,18 +34,24 @@ class AuthService {
 
     static async login(email, password) {
         // fetch user data
-        const user = await UserService.getByEmail(email, { plain: true })
+        try {
+            const user = await UserService.getByEmail(email, { plain: true })
 
-        // compare password
-        if (!(await bcrypt.compare(password, user.password))) {
-            const { INVALID_CREDENTIALS } = messages
-            throw createError(403, INVALID_CREDENTIALS)
+            if (!(await bcrypt.compare(password, user.password))) {
+                const { INVALID_CREDENTIALS } = messages
+                throw createError(403, INVALID_CREDENTIALS)
+            }
+
+            const { password: pass, ...userWithoutPassword } = user
+            const token = JWTService.sign(userWithoutPassword)
+            return { ...userWithoutPassword, token }
+        } catch (err) {
+            if (err?.statusCode === 403) {
+                throw err
+            }
+            logger.error(err)
+            throw createError(500, 'Failed to log in')
         }
-
-        // generate jwt token from user payload
-        delete user.password
-        const token = JWTService.sign(user)
-        return { ...user, token }
     }
 }
 
