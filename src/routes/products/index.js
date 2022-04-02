@@ -19,6 +19,7 @@ router.get(
 /* Create a product */
 router.post(
     '/products',
+    AuthGuard.verifyToken,
     Validator.validate('createProduct'),
     Controller.createProduct()
 )
