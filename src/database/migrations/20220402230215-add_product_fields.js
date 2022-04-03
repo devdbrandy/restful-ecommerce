@@ -13,6 +13,10 @@ module.exports = {
         await queryInterface.addColumn('Products', 'slug', Sequelize.STRING, {
             unique: true,
         })
+
+        await queryInterface.addColumn('Products', 'stock', Sequelize.INTEGER, {
+            default: 0,
+        })
     },
 
     down: async (queryInterface, Sequelize) => {
@@ -24,5 +28,6 @@ module.exports = {
       return queryInterface.dropTable('users');
     */
         await queryInterface.removeColumn('Products', 'slug')
+        await queryInterface.removeColumn('Products', 'stock')
     },
 }

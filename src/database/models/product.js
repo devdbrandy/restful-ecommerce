@@ -22,13 +22,17 @@ export default (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 unique: true,
             },
+            stock: {
+                type: DataTypes.INTEGER,
+                defaultValue: 0,
+            },
         },
         {
             paranoid: true,
             hooks: {},
             defaultScope: {
                 attributes: {
-                    exclude: ['deletedAt'],
+                    exclude: ['id', 'updatedAt', 'deletedAt'],
                 },
             },
         }
