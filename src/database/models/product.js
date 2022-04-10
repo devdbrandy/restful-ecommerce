@@ -32,7 +32,7 @@ export default (sequelize, DataTypes) => {
             hooks: {},
             defaultScope: {
                 attributes: {
-                    exclude: ['id', 'updatedAt', 'deletedAt'],
+                    exclude: ['updatedAt', 'deletedAt'],
                 },
             },
         }

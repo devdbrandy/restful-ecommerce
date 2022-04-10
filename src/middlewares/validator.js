@@ -66,9 +66,10 @@ export default class Validator {
                 "'description' is required and must exceed 4 characters"
             ).isLength(4),
             body('price', "'price' must be integer").isNumeric(),
-            body('imageUrl', "'price' must be integer").isURL({
-                require_protocol: true,
-            }),
+            body('stock', "'stock' must be integer").isNumeric(),
+            //body('imageUrl', "'price' must be integer").isURL({
+            //   require_protocol: true,
+            //}),
         ]
     }
 

@@ -1,6 +1,10 @@
 import ResponseHandler from '@helpers/response'
 
-const asyncWrapper = (fn) => (req, res, next) => fn(req, res, next).catch(next)
+const asyncWrapper = (fn) => (req, res, next) =>
+    fn(req, res, next).catch((err) => {
+        console.log(JSON.stringify(err))
+        next()
+    })
 
 class BaseController {
     constructor(service) {

@@ -42,7 +42,7 @@ class ProductsController extends BaseController {
     }
 
     /**
-     * Create a new user
+     * Create a new product
      *
      * @param {object} req - Express Request object
      * @param {object} res - Express Response object
