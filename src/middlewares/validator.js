@@ -39,8 +39,8 @@ export default class Validator {
                 body('email', 'Invalid email address').isEmail(),
                 body(
                     'password',
-                    "'password' is required and must exceed 4 characters"
-                ).isLength(5),
+                    'Password is required and must exceed 5 characters'
+                ).isLength(6),
             ],
         }
     }
@@ -50,7 +50,7 @@ export default class Validator {
             body('email', 'Invalid email address').isEmail(),
             body(
                 'password',
-                "'password' is required and must exceed 5 characters"
+                'Password is required and must exceed 5 characters'
             ).isLength(6),
         ]
     }
