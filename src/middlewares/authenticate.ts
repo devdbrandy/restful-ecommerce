@@ -1,6 +1,6 @@
 import createError from 'http-errors'
-import JWTService from '@services/jwt.service'
-import { messages } from '@helpers/constants'
+import * as jwt from '../services/jwt.service'
+import { messages } from '../helpers/constants'
 
 const { NO_AUTH_TOKEN, INVALID_AUTH_TOKEN, ACCESS_DENIED } = messages
 
@@ -23,7 +23,7 @@ export default class AuthGuard {
             }
 
             const token = authHeader.split(' ').pop()
-            const decoded = JWTService.verify(token)
+            const decoded = jwt.verify(token)
 
             if (!decoded) {
                 throw createError(401, INVALID_AUTH_TOKEN)
