@@ -11,14 +11,15 @@ router.get('/products', Controller.getAllProducts())
 
 /* Get a single product */
 router.get(
-    '/products/:id',
-    Validator.validate('idParam'),
+    '/products/:slug',
+    Validator.validate('slug'),
     Controller.getProduct()
 )
 
 /* Create a product */
 router.post(
     '/products',
+    AuthGuard.verifyToken,
     Validator.validate('createProduct'),
     Controller.createProduct()
 )

@@ -1,13 +1,13 @@
 import { Router } from 'express'
 import Validator from '../../middlewares/validator'
-import Controller from './auth.controller'
+import { register, login } from './auth.controller'
 
 const router = Router()
 
 /* POST create user account. */
-router.post('/register', Validator.validate('register'), Controller.register())
+router.post('/register', Validator.validate('register'), register)
 
 /* POST login user. */
-router.post('/login', Validator.validate('login'), Controller.login())
+router.post('/login', Validator.validate('login'), login)
 
 export default router

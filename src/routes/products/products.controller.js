@@ -30,8 +30,8 @@ class ProductsController extends BaseController {
      */
     getProduct() {
         return this.asyncWrapper(async (req, res) => {
-            const { id: productId } = req.params
-            const product = await this.service.getById(productId, {
+            const { slug } = req.params
+            const product = await this.service.getBySlug(slug, {
                 plain: true,
             })
 

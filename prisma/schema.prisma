@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Carts {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  cartItem  String
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @db.Timestamptz(6)
+}
+
+model Orders {
+  id         Int                 @id @default(autoincrement())
+  userId     Int
+  items      String
+  grandTotal Int?
+  status     enum_Orders_status? @default(pending)
+  createdAt  DateTime            @default(now()) @db.Timestamptz(6)
+  updatedAt  DateTime            @default(now()) @db.Timestamptz(6)
+}
+
+model Products {
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(255)
+  description String
+  price       Int?
+  imageUrl    String?   @db.VarChar(255)
+  createdAt   DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime  @default(now()) @db.Timestamptz(6)
+  deletedAt   DateTime? @db.Timestamptz(6)
+  slug        String?   @db.VarChar(255)
+  stock       Int?
+}
+
+model SequelizeMeta {
+  name String @id @db.VarChar(255)
+}
+
+model Users {
+  id        Int       @id @default(autoincrement())
+  password  String?   @db.VarChar(255)
+  email     String    @unique @db.VarChar(255)
+  isAdmin   Boolean?  @default(false)
+  createdAt DateTime  @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime  @default(now()) @db.Timestamptz(6)
+  deletedAt DateTime? @db.Timestamptz(6)
+}
+
+enum enum_Orders_status {
+  pending
+  processed
+  completed
+  declined
+  cancelled
+}

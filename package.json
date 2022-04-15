@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "npm run clean && babel src -d dist",
+    "build": "yarn clean && yarn tsc",
     "clean": "rimraf dist",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "db:migrate": "sequelize db:migrate",
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.9.6",
+    "@prisma/client": "^3.12.0",
     "@types/jest": "^25.2.2",
     "babel-jest": "^26.0.1",
     "bcryptjs": "^2.4.3",
@@ -49,6 +50,9 @@
     "@babel/plugin-transform-runtime": "^7.9.6",
     "@babel/preset-env": "^7.9.5",
     "@babel/register": "^7.9.0",
+    "@types/bcrypt": "^5.0.0",
+    "@types/express": "^4.17.13",
+    "@types/sequelize": "^4.28.11",
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-polyfill": "^6.26.0",
     "babel-register": "^6.26.0",
@@ -59,7 +63,9 @@
     "eslint-plugin-import": "^2.20.2",
     "nodemon": "^2.0.3",
     "nyc": "^15.0.1",
+    "prisma": "^3.12.0",
     "rimraf": "^3.0.2",
-    "sequelize-cli": "^5.5.1"
+    "sequelize-cli": "^5.5.1",
+    "typescript": "^4.6.3"
   }
 }

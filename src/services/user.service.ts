@@ -61,7 +61,7 @@ class UserService extends BaseService {
      * @returns {object} The newly created resource
      * @memberof UserService
      */
-    async create(data, options) {
+    async create(data, options = {}) {
         const result = await super.create(data, options)
 
         delete result.password

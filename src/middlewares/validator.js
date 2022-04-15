@@ -3,7 +3,8 @@ import { param, body, validationResult } from 'express-validator'
 export default class Validator {
     static get routes() {
         return {
-            idParam: [param('id', 'Invalid resource id param').isNumeric()],
+            idParam: [param('id', 'Invalid idParam').isNumeric()],
+            slug: [param('slug', 'Invalid slug').isString()],
             productIdParam: [
                 param(
                     'productId',
