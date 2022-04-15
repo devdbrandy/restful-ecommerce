@@ -1,30 +1,23 @@
 import bcrypt from 'bcryptjs'
 import createError from 'http-errors'
 
-import UserService from './user.service'
+import { getByEmail, create } from './user.service'
 import JWTService from './jwt.service'
 
 import { messages } from '../helpers/constants'
 import logger from '../helpers/logger'
 import { NextFunction, Request, Response } from 'express'
 
-/**
- * Auth Service Module
- *
- * @export
- * @class AuthService
- */
-
 export const register = async (args: { email: string; password: string }) => {
     const { email, password } = args
     try {
-        const user = await UserService.getByEmail(email)
+        const user = await getByEmail(email)
 
         if (user) {
             throw createError(409, messages.USER_ALREADY_EXISTS)
         }
 
-        const newUser = await UserService.create({
+        const newUser = await create({
             email,
             password,
         })
@@ -47,7 +40,7 @@ export const login = async (
 ) => {
     try {
         const { email, password } = req.body
-        const user = await UserService.getByEmail(email)
+        const user = await getByEmail(email)
 
         if (!user) {
             throw createError(404, messages.USER_NOT_FOUND)

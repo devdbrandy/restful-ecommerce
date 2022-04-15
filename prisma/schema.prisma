@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Carts {
+model Cart {
   id        Int      @id @default(autoincrement())
   userId    Int
   cartItem  String
@@ -15,7 +15,7 @@ model Carts {
   updatedAt DateTime @default(now()) @db.Timestamptz(6)
 }
 
-model Orders {
+model Order {
   id         Int                 @id @default(autoincrement())
   userId     Int
   items      String
@@ -25,7 +25,7 @@ model Orders {
   updatedAt  DateTime            @default(now()) @db.Timestamptz(6)
 }
 
-model Products {
+model Product {
   id          Int       @id @default(autoincrement())
   title       String    @db.VarChar(255)
   description String
@@ -38,11 +38,7 @@ model Products {
   stock       Int?
 }
 
-model SequelizeMeta {
-  name String @id @db.VarChar(255)
-}
-
-model Users {
+model User {
   id        Int       @id @default(autoincrement())
   password  String?   @db.VarChar(255)
   email     String    @unique @db.VarChar(255)

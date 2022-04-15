@@ -12,8 +12,7 @@ export default class BaseService {
      * @returns {Array} List of users
      * @memberof BaseService
      */
-    async getAll(options = {}) {
-        const { plain, ...option } = options
+    async getAll() {
         const rows = await this.model.findAll(option)
 
         return plain === true ? rows.map((row) => row.get({ plain })) : rows
