@@ -2,6 +2,9 @@
   "name": "restful-ecommerce",
   "version": "0.0.0",
   "private": true,
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "scripts": {
     "build": "yarn clean && yarn tsc",
     "clean": "rimraf dist",
