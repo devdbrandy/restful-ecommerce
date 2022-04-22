@@ -1,4 +1,4 @@
-import createError from 'http-errors'
+import * as createError from 'http-errors'
 import * as express from 'express'
 import * as cookieParser from 'cookie-parser'
 import * as path from 'path'
