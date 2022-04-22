@@ -1,5 +1,11 @@
-import faker from 'faker';
-import models from '@models';
+import faker from 'faker'
+import models from '../models'
+
+const getRandomInt = (min, max) => {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min + 1)) + min
+}
 
 /**
  * @typedef {import('sequelize').Model} Model
@@ -19,22 +25,23 @@ import models from '@models';
  * @param {Product} [props={}] - The product properties
  */
 export const productFactory = (props = {}) => {
-  const defaultProps = {
-    title: faker.commerce.productName(),
-    description: faker.lorem.paragraph(),
-    price: +faker.commerce.price(),
-    imageUrl: faker.image.imageUrl()
-  };
+    const defaultProps = {
+        title: faker.commerce.productName(),
+        description: faker.lorem.paragraph(),
+        price: +faker.commerce.price(),
+        imageUrl: 'https://picsum.photos/600/800',
+        stock: getRandomInt(2, 10),
+    }
 
-  return { ...defaultProps, ...props };
-};
+    return { ...defaultProps, ...props }
+}
 
 /**
  * Instantiate product class with default attributes
  * @param {Product} [props={}] - The product properties
  * @returns {Model} A product model
  */
-export const build = props => new models.Product(productFactory(props));
+export const build = (props) => new models.Product(productFactory(props))
 
 /**
  * Generates a product model instance with default attributes
@@ -42,12 +49,12 @@ export const build = props => new models.Product(productFactory(props));
  * @returns {Model|Product}
  */
 export default async (props, plain = true) => {
-  let product = await models.Product.create(productFactory(props));
+    let product = await models.Product.create(productFactory(props))
 
-  if (plain) {
-    product = product.get();
-    delete product.deletedAt;
-  }
+    if (plain) {
+        product = product.get()
+        delete product.deletedAt
+    }
 
-  return product;
-};
+    return product
+}

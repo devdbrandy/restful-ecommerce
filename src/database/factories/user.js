@@ -1,5 +1,5 @@
-import faker from 'faker';
-import models from '@models';
+import faker from 'faker'
+import models from '../models'
 
 /**
  * @typedef {import('sequelize').Model} Model
@@ -20,22 +20,20 @@ import models from '@models';
  * @param {User} [props={}] - The user properties
  */
 export const userFactory = (props = {}) => {
-  const defaultProps = {
-    firstName: faker.name.firstName(),
-    lastName: faker.name.lastName(),
-    email: faker.internet.email(),
-    password: 'secret'
-  };
+    const defaultProps = {
+        email: faker.internet.email(),
+        password: 'secret',
+    }
 
-  return { ...defaultProps, ...props };
-};
+    return { ...defaultProps, ...props }
+}
 
 /**
  * Instantiate user class with default attributes
  * @param {User} [props={}] - The user properties
  * @returns {Model} A User model
  */
-export const build = props => new models.User(userFactory(props));
+export const build = (props) => new models.User(userFactory(props))
 
 /**
  * Generates a user model instance with default attributes
@@ -43,12 +41,12 @@ export const build = props => new models.User(userFactory(props));
  * @returns {Model|User}
  */
 export default async (props, plain = true) => {
-  let user = await models.User.create(userFactory(props));
+    let user = await models.User.create(userFactory(props))
 
-  if (plain) {
-    user = user.get();
-    delete user.deletedAt;
-  }
+    if (plain) {
+        user = user.get()
+        delete user.deletedAt
+    }
 
-  return user;
-};
+    return user
+}
