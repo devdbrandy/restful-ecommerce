@@ -1,4 +1,4 @@
-import { productFactory } from '@factories/product'
+import { productFactory } from '../factories/product'
 
 export const up = async (queryInterface) => {
     const demoProducts = []

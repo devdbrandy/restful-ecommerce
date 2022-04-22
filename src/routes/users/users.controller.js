@@ -1,5 +1,5 @@
-import UserService from '@services/user.service'
-import ExceptionHandler from '@helpers/exception'
+import UserService from '../../services/user.service'
+import ExceptionHandler from '../../helpers/exception'
 import BaseController from '../base-controller'
 
 class UsersController extends BaseController {

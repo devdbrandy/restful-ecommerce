@@ -1,4 +1,4 @@
-import ResponseHandler from '@helpers/response'
+import ResponseHandler from '../helpers/response'
 
 const asyncWrapper = (fn) => (req, res, next) =>
     fn(req, res, next).catch((err) => {

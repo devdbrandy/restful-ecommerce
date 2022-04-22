@@ -1,4 +1,4 @@
-import { env } from '@helpers/utils'
+import { env } from '../helpers/utils'
 
 const environment = env('NODE_ENV', 'development')
 const databaseURL = env('DATABASE_URL')

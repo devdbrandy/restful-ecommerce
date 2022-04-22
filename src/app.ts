@@ -1,12 +1,12 @@
 import createError from 'http-errors'
-import express from 'express'
-import cookieParser from 'cookie-parser'
-import path from 'path'
-import cors from 'cors'
+import * as express from 'express'
+import * as cookieParser from 'cookie-parser'
+import * as path from 'path'
+import * as cors from 'cors'
 
-import httpLogger from '@middlewares/http-logger'
-import Exception from '@helpers/exception'
-import { messages } from '@helpers/constants'
+import httpLogger from './middlewares/http-logger'
+import Exception from './helpers/exception'
+import { messages } from './helpers/constants'
 
 import routeModules from './routes'
 
@@ -29,6 +29,5 @@ app.use((req, res, next) => next(createError(404, NOT_FOUND)))
 // exception handlers
 app.use(Exception.handleDatabaseError())
 app.use(Exception.handleDatabaseUniqueError())
-app.use(Exception.handleError())
 
 export default app

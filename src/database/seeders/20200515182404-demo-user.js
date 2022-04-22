@@ -1,4 +1,4 @@
-import { userFactory } from '@factories/user'
+import { userFactory } from '../factories/user'
 
 export const up = async (queryInterface) => {
     const password =

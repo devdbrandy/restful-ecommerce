@@ -1,27 +1,29 @@
 import { Router } from 'express'
 
-import Validator from '@middlewares/validator'
-import AuthGuard from '@middlewares/authenticate'
-import Controller from './products.controller'
+import Validator from '../../middlewares/validator'
+import AuthGuard from '../../middlewares/authenticate'
+import {
+    getAllProducts,
+    getProductBySlug,
+    createProduct,
+    updateProduct,
+    deleteProduct,
+} from './products.controller'
 
 const router = Router()
 
 /* List of products */
-router.get('/products', Controller.getAllProducts())
+router.get('/products', getAllProducts)
 
 /* Get a single product */
-router.get(
-    '/products/:slug',
-    Validator.validate('slug'),
-    Controller.getProduct()
-)
+router.get('/products/:slug', Validator.validate('slug'), getProductBySlug)
 
 /* Create a product */
 router.post(
     '/products',
     AuthGuard.verifyToken,
     Validator.validate('createProduct'),
-    Controller.createProduct()
+    createProduct
 )
 
 /* Edit a specific product */
@@ -30,7 +32,7 @@ router.put(
     AuthGuard.verifyToken,
     AuthGuard.adminOnly,
     Validator.validate('idParam'),
-    Controller.updateProduct()
+    updateProduct
 )
 
 /* Delete a product */
@@ -39,7 +41,7 @@ router.delete(
     AuthGuard.verifyToken,
     AuthGuard.adminOnly,
     Validator.validate('idParam'),
-    Controller.destroyProduct()
+    deleteProduct
 )
 
 export default router

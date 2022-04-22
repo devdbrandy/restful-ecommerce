@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs'
 import createError from 'http-errors'
 
 import { getByEmail, create } from './user.service'
-import JWTService from './jwt.service'
+import * as JWTService from './jwt.service'
 
 import { messages } from '../helpers/constants'
 import logger from '../helpers/logger'
@@ -33,13 +33,9 @@ export const register = async (args: { email: string; password: string }) => {
     }
 }
 
-export const login = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
+export const login = async (args: { email: string; password: string }) => {
+    const { email, password } = args
     try {
-        const { email, password } = req.body
         const user = await getByEmail(email)
 
         if (!user) {
@@ -54,12 +50,11 @@ export const login = async (
 
         const token = JWTService.sign(user)
 
-        res.status(200).json({
+        return {
             token,
             user,
-        })
+        }
     } catch (error) {
         logger.error(error)
-        next(error)
     }
 }

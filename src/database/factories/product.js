@@ -1,5 +1,5 @@
 import faker from 'faker'
-import models from '@models'
+import models from '../models'
 
 const getRandomInt = (min, max) => {
     min = Math.ceil(min)

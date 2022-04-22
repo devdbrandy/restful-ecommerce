@@ -1,6 +1,6 @@
 import createError from 'http-errors'
 import { DatabaseError, UniqueConstraintError } from 'sequelize'
-import Response from '@helpers/response'
+import Response from '../helpers/response'
 import { messages } from './constants'
 
 const { RESOURCE_NOT_FOUND, OUT_OF_BOUND } = messages

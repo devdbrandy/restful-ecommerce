@@ -2,8 +2,8 @@ import fs from 'fs'
 import path from 'path'
 import Sequelize from 'sequelize'
 
-import dbConfig from '@config/db'
-import { env } from '@helpers/utils'
+import dbConfig from '../config/db'
+import { env } from '../helpers/utils'
 
 const basename = path.basename(__filename)
 const environment = env('NODE_ENV', 'development')
