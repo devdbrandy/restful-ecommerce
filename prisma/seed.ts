@@ -8,7 +8,7 @@ const productData: Prisma.ProductCreateInput[] = [
         description: 'Tricko - z bavlny',
         price: 1500,
         imageUrl: '',
-        slug: 'Tricko',
+        slug: 'tricko',
         stock: 2,
     },
     {
@@ -16,7 +16,7 @@ const productData: Prisma.ProductCreateInput[] = [
         description: 'Sroubky - krabicka',
         price: 100,
         imageUrl: '',
-        slug: 'Sroubky',
+        slug: 'sroubky',
         stock: 100,
     }
 ]

@@ -48,6 +48,11 @@ model User {
   deletedAt DateTime? @db.Timestamptz(6)
 }
 
+model Category {
+  id   Int    @id @default(autoincrement())
+  name String
+}
+
 enum enum_Orders_status {
   pending
   processed
