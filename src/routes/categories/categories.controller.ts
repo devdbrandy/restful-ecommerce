@@ -7,33 +7,30 @@ export const getAllCategories = async (
     res: Response
 ): Promise<void> => {
     try {
-        const products = await categoryService.getAllCategories()
-        res.status(200).json(products)
+        const categories = await categoryService.getAllCategories()
+        res.status(200).json(categories)
     } catch (error) {
         res.status(500).json(error)
     }
 }
 
-// export const getProductById = async (req: Request, res: Response) => {
-//     const { id } = req.params
-//     try {
-//         const product = await categoryService.getProductById(+id)
-//         res.status(200).json(product)
-//     } catch (error) {
-//         res.status(500).json(error)
-//     }
-// }
+export const getCategoryById = async (req: Request, res: Response) => {
+    const { id } = req.params
+    try {
+        const category = await categoryService.getCategoryById(+id)
+        res.status(200).json(category)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
 
 export const createCategory = async (req: Request, res: Response) => {
-    const { title, description, price, slug, image } = req.body
+    const { name } = req.body
     try {
-        const product = await categoryService.createCategory({
-            title,
-            description,
-            price,
-            slug,
+        const category = await categoryService.createCategory({
+            name
         })
-        res.status(201).json(product)
+        res.status(201).json(category)
     } catch (error) {
         res.status(500).json(error)
     }
@@ -41,15 +38,12 @@ export const createCategory = async (req: Request, res: Response) => {
 
 export const updateCategory = async (req: Request, res: Response) => {
     const { id } = req.params
-    const { title, description, price, slug, image } = req.body
+    const { name } = req.body
     try {
-        const product = await categoryService.updateCategory(+id, {
-            title,
-            description,
-            price,
-            slug,
+        const category = await categoryService.updateCategory(+id, {
+            name,
         })
-        res.status(200).json(product)
+        res.status(200).json(category)
     } catch (error) {
         res.status(500).json(error)
     }
@@ -60,7 +54,7 @@ export const deleteCategory = async (req: Request, res: Response) => {
     const { id } = req.params
     try {
         await categoryService.deleteCategory(+id)
-        res.status(200).json({ message: 'Product deleted' })
+        res.status(200).json({ message: 'Category deleted' })
     } catch (error) {
         res.status(500).json(error)
     }
