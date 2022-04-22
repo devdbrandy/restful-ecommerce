@@ -13,6 +13,7 @@ export default class Validator {
             ],
             createUser: [...Validator.userResource()],
             createProduct: [...Validator.productResource()],
+            createCategory: [...Validator.categoryResource()],
 
             addCart: [
                 body(
@@ -71,6 +72,15 @@ export default class Validator {
             //body('imageUrl', "'price' must be integer").isURL({
             //   require_protocol: true,
             //}),
+        ]
+    }
+
+    static categoryResource() {
+        return [
+            body(
+                'name',
+                "'name' is required"
+            ).isString(),
         ]
     }
 

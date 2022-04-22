@@ -3,6 +3,7 @@ import authRouter from './auth'
 import usersRoute from './users'
 import productsRoute from './products'
 import ordersRoute from './orders'
+import categoryRoute from './categories'
 
 /**
  * Routes register
@@ -18,6 +19,7 @@ const routes = (app) => {
     app.use(apiPrefix, usersRoute)
     app.use(apiPrefix, productsRoute)
     app.use(apiPrefix, ordersRoute)
+    app.use(apiPrefix, categoryRoute)
 
     return app
 }

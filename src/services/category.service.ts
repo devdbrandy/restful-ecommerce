@@ -8,44 +8,44 @@ export const getAllCategories = async (): Promise<Category[]> => {
 
 // Get product from database by id
 export const getCategoryById = async (id: number): Promise<Category> => {
-    const product = await prisma.product.findUnique({
+    const category = await prisma.category.findUnique({
         where: {
             id,
         },
     })
-    return product
+    return category
 }
 
 // Create product
 export const createCategory = async (
-    data: Prisma.ProductCreateInput
+    data: Prisma.CategoryCreateInput
 ): Promise<Category> => {
-    const product = await prisma.product.create({
+    const category = await prisma.category.create({
         data,
     })
-    return product
+    return category
 }
 
 // Update product
 export const updateCategory = async (
     id: number,
-    data: Prisma.ProductUpdateInput
+    data: Prisma.CategoryUpdateInput
 ): Promise<Category> => {
-    const product = await prisma.product.update({
+    const category = await prisma.category.update({
         where: {
             id,
         },
         data,
     })
-    return product
+    return category
 }
 
 // Delete product
 export const deleteCategory = async (id: number): Promise<Category> => {
-    const product = await prisma.product.delete({
+    const category = await prisma.category.delete({
         where: {
             id,
         },
     })
-    return product
+    return category
 }

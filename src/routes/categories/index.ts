@@ -11,31 +11,31 @@ import {
 
 const router = Router()
 
-/* List of products */
-router.get('/products', getAllCategories)
+/* List of categories */
+router.get('/categories', getAllCategories)
 
-/* Create a product */
+/* Create a category */
 router.post(
-    '/products',
+    '/categories',
     AuthGuard.verifyToken,
-    Validator.validate('createProduct'),
+    Validator.validate('createCategory'),
     createCategory
 )
 
-/* Edit a specific product */
+/* Edit a specific category */
 router.put(
-    '/products/:id',
+    '/categories/:id',
     AuthGuard.verifyToken,
     AuthGuard.adminOnly,
     Validator.validate('idParam'),
     updateCategory
 )
 
-/* Delete a product */
+/* Delete a category */
 router.delete(
-    '/products/:id',
-    AuthGuard.verifyToken,
-    AuthGuard.adminOnly,
+    '/categories/:id',
+    //AuthGuard.verifyToken,
+    //AuthGuard.adminOnly,
     Validator.validate('idParam'),
     deleteCategory
 )
