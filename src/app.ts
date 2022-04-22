@@ -11,6 +11,7 @@ import { messages } from './helpers/constants'
 import routeModules from './routes'
 
 const app = express()
+const port = process.env.PORT || 4000
 const { NOT_FOUND } = messages
 
 app.use(httpLogger)
@@ -29,5 +30,9 @@ app.use((req, res, next) => next(createError(404, NOT_FOUND)))
 // exception handlers
 app.use(Exception.handleDatabaseError())
 app.use(Exception.handleDatabaseUniqueError())
+
+app.listen(port, () => {
+    console.log(`⚡️[server]: Server is running at https://localhost:${port}`)
+})
 
 export default app
