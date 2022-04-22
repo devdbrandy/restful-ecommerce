@@ -2,7 +2,24 @@ import { PrismaClient, Prisma } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-const productData: Prisma.ProductCreateInput[] = []
+const productData: Prisma.ProductCreateInput[] = [
+    {
+        title: 'Tricko',
+        description: 'Tricko - z bavlny',
+        price: 1500,
+        imageUrl: '',
+        slug: 'Tricko',
+        stock: 2,
+    },
+    {
+        title: 'Sroubky',
+        description: 'Sroubky - krabicka',
+        price: 100,
+        imageUrl: '',
+        slug: 'Sroubky',
+        stock: 100,
+    }
+]
 
 const userData: Prisma.UserCreateInput[] = [
     {
@@ -18,6 +35,14 @@ const userData: Prisma.UserCreateInput[] = [
 
 async function main() {
     console.log(`Start seeding ...`)
+    for (const p of productData) {
+        const product = await prisma.product.create({
+            data: p,
+        })
+        console.log(`Created product with id: ${product.id}`)
+    }
+    console.log(`Seeding finished.`)
+    
     for (const u of userData) {
         const user = await prisma.user.create({
             data: u,
