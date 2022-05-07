@@ -27,8 +27,14 @@ export const getCategoryById = async (req: Request, res: Response) => {
 export const createCategory = async (req: Request, res: Response) => {
     const { name } = req.body
     try {
+        const exists = await categoryService.getCategoryByName(name)
+        if (exists) {
+            res.status(201).json(exists)
+            return
+        }
+
         const category = await categoryService.createCategory({
-            name
+            name,
         })
         res.status(201).json(category)
     } catch (error) {
@@ -49,7 +55,7 @@ export const updateCategory = async (req: Request, res: Response) => {
     }
 }
 
-// Delete product by id
+// Delete category by id
 export const deleteCategory = async (req: Request, res: Response) => {
     const { id } = req.params
     try {

@@ -15,12 +15,7 @@ const router = Router()
 router.get('/categories', getAllCategories)
 
 /* Create a category */
-router.post(
-    '/categories',
-    AuthGuard.verifyToken,
-    Validator.validate('createCategory'),
-    createCategory
-)
+router.post('/categories', Validator.validate('createCategory'), createCategory)
 
 /* Edit a specific category */
 router.put(

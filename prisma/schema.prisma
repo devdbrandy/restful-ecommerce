@@ -16,13 +16,20 @@ model Cart {
 }
 
 model Order {
-  id         Int                 @id @default(autoincrement())
-  userId     Int
-  items      String
-  grandTotal Int?
-  status     enum_Orders_status? @default(pending)
-  createdAt  DateTime            @default(now()) @db.Timestamptz(6)
-  updatedAt  DateTime            @default(now()) @db.Timestamptz(6)
+  id          Int                 @id @default(autoincrement())
+  userId      Int
+  firstName   String
+  lastName    String
+  email       String
+  phoneNumber String
+  street      String
+  country     String
+  city        String
+  items       String
+  grandTotal  Int?
+  status      enum_Orders_status? @default(pending)
+  createdAt   DateTime            @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime            @default(now()) @db.Timestamptz(6)
 }
 
 model Product {
@@ -36,6 +43,7 @@ model Product {
   deletedAt   DateTime? @db.Timestamptz(6)
   slug        String?   @db.VarChar(255)
   stock       Int?
+  categoryId  Int?
 }
 
 model User {

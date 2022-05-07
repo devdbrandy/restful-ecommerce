@@ -1,4 +1,4 @@
-import createError from 'http-errors'
+import * as createError from 'http-errors'
 import { DatabaseError, UniqueConstraintError } from 'sequelize'
 import Response from '../helpers/response'
 import { messages } from './constants'

@@ -1,4 +1,4 @@
-import createError from 'http-errors'
+import * as createError from 'http-errors'
 import * as jwt from '../services/jwt.service'
 import { messages } from '../helpers/constants'
 
@@ -29,7 +29,7 @@ export default class AuthGuard {
                 throw createError(401, INVALID_AUTH_TOKEN)
             }
 
-            req.user = decoded.user
+            req.user = decoded
             next()
         } catch (err) {
             next(err)
@@ -49,7 +49,7 @@ export default class AuthGuard {
         const { user } = req
 
         try {
-            if (!user.isAdmin) {
+            if (!user?.isAdmin) {
                 throw createError(403, ACCESS_DENIED)
             }
 

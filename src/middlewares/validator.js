@@ -69,6 +69,7 @@ export default class Validator {
             ).isLength(4),
             body('price', "'price' must be integer").isNumeric(),
             body('stock', "'stock' must be integer").isNumeric(),
+            body('categoryId', "'categoryId' must be integer").isNumeric(),
             //body('imageUrl', "'price' must be integer").isURL({
             //   require_protocol: true,
             //}),
@@ -76,12 +77,7 @@ export default class Validator {
     }
 
     static categoryResource() {
-        return [
-            body(
-                'name',
-                "'name' is required"
-            ).isString(),
-        ]
+        return [body('name', "'name' is required").isString()]
     }
 
     static validate(route) {
