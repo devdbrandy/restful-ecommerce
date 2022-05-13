@@ -4,16 +4,19 @@ import { Product, Prisma } from '@prisma/client'
 // Get all products
 export const getAllProducts = async (
     categoryId?: number,
-    search?: string
+    search?: string,
+    offset?: number,
+    size?: number
 ): Promise<Product[]> => {
     const filters = {
         ...(categoryId && { categoryId }),
         ...(search && { title: { contains: search } }),
     }
     console.log(filters, !!filters)
-    return prisma.product.findMany(
-        Object.keys(filters).length && { where: filters }
-    )
+    return prisma.product.findMany({
+        ...(Object.keys(filters).length && { where: filters }),
+        ...(offset && size && { skip: offset, take: size }),
+    })
 }
 
 // Get product from database by slug

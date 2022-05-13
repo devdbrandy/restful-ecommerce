@@ -9,7 +9,9 @@ export const getAllProducts = async (
     try {
         const products = await productService.getAllProducts(
             +req.query?.category || null,
-            (req.query?.search as string) || null
+            (req.query?.search as string) || null,
+            +req.query?.offset || null,
+            +req.query?.size || null
         )
         res.status(200).json(products)
     } catch (error) {
