@@ -43,6 +43,7 @@ model Product {
   deletedAt   DateTime? @db.Timestamptz(6)
   slug        String?   @db.VarChar(255)
   stock       Int?
+  stocks      String?
   categoryId  Int?
 }
 

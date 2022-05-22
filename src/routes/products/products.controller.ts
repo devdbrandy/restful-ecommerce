@@ -47,7 +47,7 @@ const sluggify = (name: string) =>
         .replace(/[^a-z0-9-]/g, '')
 
 export const createProduct = async (req: Request, res: Response) => {
-    const { title, description, price, categoryId } = req.body
+    const { title, description, price, categoryId, stocks } = req.body
     try {
         const product = await productService.createProduct({
             title,
@@ -55,6 +55,7 @@ export const createProduct = async (req: Request, res: Response) => {
             price: +price,
             slug: sluggify(title),
             categoryId: +categoryId,
+            stocks: JSON.stringify(stocks),
         })
         res.status(201).json(product)
     } catch (error) {
@@ -64,13 +65,14 @@ export const createProduct = async (req: Request, res: Response) => {
 
 export const updateProduct = async (req: Request, res: Response) => {
     const { id } = req.params
-    const { title, description, price, slug, image } = req.body
+    const { title, description, price, slug, image, stocks } = req.body
     try {
         const product = await productService.updateProduct(+id, {
             title,
             description,
             price,
             slug,
+            stocks: JSON.stringify(stocks),
         })
         res.status(200).json(product)
     } catch (error) {

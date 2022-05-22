@@ -44,7 +44,6 @@ export const createProduct = async (
     data: Prisma.ProductCreateInput
 ): Promise<Product> => {
     try {
-        console.log(data)
         const product = await prisma.product.create({
             data,
         })
