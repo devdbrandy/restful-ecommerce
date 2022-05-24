@@ -1,9 +1,10 @@
-import homeRouter from './home';
-import authRouter from './auth';
-import usersRoute from './users';
-import productsRoute from './products';
-import cartRoute from './cart';
-import ordersRoute from './orders';
+import homeRouter from './home'
+import authRouter from './auth'
+import usersRoute from './users'
+import productsRoute from './products'
+import ordersRoute from './orders'
+import categoryRoute from './categories'
+import emailRoute from './email'
 
 /**
  * Routes register
@@ -11,17 +12,18 @@ import ordersRoute from './orders';
  * @param {object} app - The express main app
  * @returns {void}
  */
-const routes = app => {
-  const apiPrefix = '/api/v1';
+const routes = (app) => {
+    const apiPrefix = '/api/v1'
 
-  app.use(homeRouter);
-  app.use(authRouter);
-  app.use(apiPrefix, usersRoute);
-  app.use(apiPrefix, productsRoute);
-  app.use(apiPrefix, cartRoute);
-  app.use(apiPrefix, ordersRoute);
+    app.use(homeRouter)
+    app.use(authRouter)
+    app.use(apiPrefix, usersRoute)
+    app.use(apiPrefix, productsRoute)
+    app.use(apiPrefix, ordersRoute)
+    app.use(apiPrefix, categoryRoute)
+    app.use(apiPrefix, emailRoute)
 
-  return app;
-};
+    return app
+}
 
-export default routes;
+export default routes
