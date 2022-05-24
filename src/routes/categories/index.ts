@@ -17,7 +17,7 @@ router.get('/categories', getAllCategories)
 /* Create a category */
 router.post(
     '/categories',
-    AuthGuard.verifyToken,
+    //AuthGuard.verifyToken,
     Validator.validate('createCategory'),
     createCategory
 )
@@ -25,8 +25,8 @@ router.post(
 /* Edit a specific category */
 router.put(
     '/categories/:id',
-    AuthGuard.verifyToken,
-    AuthGuard.adminOnly,
+    //AuthGuard.verifyToken,
+    //AuthGuard.adminOnly,
     Validator.validate('idParam'),
     updateCategory
 )
