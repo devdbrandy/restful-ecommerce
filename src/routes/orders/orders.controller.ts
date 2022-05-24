@@ -1,6 +1,7 @@
 import { Response } from 'express'
 import { Request } from '../../helpers/constants'
 import * as orderService from '../../services/order.service'
+import { PlaceOrderPayload } from '../../types/order'
 
 export const getOrders = async (req: Request, res: Response) => {
     const { id: userId } = req.user
@@ -15,10 +16,14 @@ export const getOrder = async (req: Request, res: Response) => {
 }
 
 export const placeOrder = async (req: Request, res: Response) => {
-    const { id: userId } = req.user
-    const { id: productId } = req.params
-    const order = await orderService.placeOrder(userId, +productId)
-    return order
+    try {
+        const { id: userId } = req.user
+        const data: PlaceOrderPayload = req.body
+        const order = await orderService.placeOrder(userId, data)
+        res.status(200).json(order)
+    } catch (error) {
+        res.status(500).json({ error: error?.message })
+    }
 }
 
 export const cancelOrder = async (req: Request, res: Response) => {

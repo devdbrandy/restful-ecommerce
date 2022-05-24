@@ -1,5 +1,5 @@
-import bcrypt from 'bcryptjs'
-import createError from 'http-errors'
+import * as bcrypt from 'bcrypt'
+import * as createError from 'http-errors'
 
 import { getByEmail, create } from './user.service'
 import * as JWTService from './jwt.service'
@@ -17,9 +17,9 @@ export const register = async (args: { email: string; password: string }) => {
             throw createError(409, messages.USER_ALREADY_EXISTS)
         }
 
-        const newUser = await create({
+        const { password: _, ...newUser } = await create({
             email,
-            password,
+            password: await bcrypt.hash(password, 'saltysalty'),
         })
 
         const token = JWTService.sign(newUser)
@@ -35,26 +35,22 @@ export const register = async (args: { email: string; password: string }) => {
 
 export const login = async (args: { email: string; password: string }) => {
     const { email, password } = args
-    try {
-        const user = await getByEmail(email)
+    const { password: storedPassword, ...user } = await getByEmail(email)
 
-        if (!user) {
-            throw createError(404, messages.USER_NOT_FOUND)
-        }
+    if (!user) {
+        throw createError(404, messages.USER_NOT_FOUND)
+    }
 
-        const isPasswordValid = await bcrypt.compare(password, user.password)
+    const isPasswordValid = await bcrypt.compare(password, storedPassword)
 
-        if (!isPasswordValid) {
-            throw createError(401, messages.INVALID_PASSWORD)
-        }
+    if (!isPasswordValid) {
+        throw createError(401, messages.INVALID_PASSWORD)
+    }
 
-        const token = JWTService.sign(user)
+    const token = JWTService.sign(user)
 
-        return {
-            token,
-            user,
-        }
-    } catch (error) {
-        logger.error(error)
+    return {
+        token,
+        user,
     }
 }

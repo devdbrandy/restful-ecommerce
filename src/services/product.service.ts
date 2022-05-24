@@ -2,8 +2,21 @@ import { prisma } from '../prisma'
 import { Product, Prisma } from '@prisma/client'
 
 // Get all products
-export const getAllProducts = async (): Promise<Product[]> => {
-    return prisma.product.findMany()
+export const getAllProducts = async (
+    categoryId?: number,
+    search?: string,
+    offset?: number,
+    size?: number
+): Promise<Product[]> => {
+    const filters = {
+        ...(categoryId && { categoryId }),
+        ...(search && { title: { contains: search } }),
+    }
+    console.log(filters, !!filters)
+    return prisma.product.findMany({
+        ...(Object.keys(filters).length && { where: filters }),
+        ...(offset && size && { skip: offset, take: size }),
+    })
 }
 
 // Get product from database by slug
@@ -30,10 +43,15 @@ export const getProductById = async (id: number): Promise<Product> => {
 export const createProduct = async (
     data: Prisma.ProductCreateInput
 ): Promise<Product> => {
-    const product = await prisma.product.create({
-        data,
-    })
-    return product
+    try {
+        const product = await prisma.product.create({
+            data,
+        })
+        return product
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
 }
 
 // Update product

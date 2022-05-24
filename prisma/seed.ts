@@ -18,23 +18,27 @@ const productData: Prisma.ProductCreateInput[] = [
         imageUrl: '',
         slug: 'sroubky',
         stock: 100,
-    }
+    },
 ]
 
 const userData: Prisma.UserCreateInput[] = [
     {
         email: 'admin@example.com',
-        password: 'secret',
+        password:
+            '$2a$12$OuPDDpnGwL4baaBQgd.Q7uI.y4CXvMNMu7v3eIGFcjRVtPRRi7vJ6',
         isAdmin: true,
     },
     {
         email: 'user@example.com',
-        password: 'secret',
+        password:
+            '$2a$12$OuPDDpnGwL4baaBQgd.Q7uI.y4CXvMNMu7v3eIGFcjRVtPRRi7vJ6',
     },
 ]
 
 async function main() {
     console.log(`Start seeding ...`)
+    await prisma.product.deleteMany()
+    await prisma.user.deleteMany()
     for (const p of productData) {
         const product = await prisma.product.create({
             data: p,
@@ -42,7 +46,7 @@ async function main() {
         console.log(`Created product with id: ${product.id}`)
     }
     console.log(`Seeding finished.`)
-    
+
     for (const u of userData) {
         const user = await prisma.user.create({
             data: u,

@@ -16,6 +16,15 @@ export const getCategoryById = async (id: number): Promise<Category> => {
     return category
 }
 
+export const getCategoryByName = async (name: string): Promise<Category> => {
+    const category = await prisma.category.findFirst({
+        where: {
+            name,
+        },
+    })
+    return category
+}
+
 // Create product
 export const createCategory = async (
     data: Prisma.CategoryCreateInput
